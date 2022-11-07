@@ -4,11 +4,13 @@ pragma solidity 0.8.7;
 
 contract AccessControl{
 
-    event SetRole(bytes32 indexed role,
+    event SetRole(
+    bytes32 indexed role,
     address indexed account
     );
     
-    event RevokeRole(bytes32 indexed role,
+    event RevokeRole(
+    bytes32 indexed role,
     address indexed account
     );
 
@@ -21,14 +23,17 @@ contract AccessControl{
       _setRole(OWNER, msg.sender);
   }
 
-  modifier onlyOwner(bytes32 _owner){
+  modifier onlyOwner(
+  bytes32 _owner
+  ){
       require(roles[_owner][msg.sender],"you are not Owner");
       _;
   }
 
 
-  function _setRole(bytes32 _role,
-  address _account
+  function _setRole(
+  bytes32 _role,
+  address _account 
   )internal{
 
      roles[_role][_account] = true;
@@ -37,7 +42,8 @@ contract AccessControl{
   }
 
   //setting the role only called by current OWNER
-  function setRole(bytes32 _role,
+  function setRole(
+  bytes32 _role,
   address _newOwner
   )external  onlyOwner(OWNER){
 
@@ -45,7 +51,8 @@ contract AccessControl{
   }
 
   //revoke the current owner only called by newOwner
-  function revokeRole(bytes32 _role,
+  function revokeRole(
+  bytes32 _role,
   address _newOwner
   )external  onlyOwner(OWNER){
   
